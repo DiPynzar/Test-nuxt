@@ -1,22 +1,25 @@
 <template>
   <div>
     <h2 @click.prevent="$emit('unset-brand')">All Brands</h2>
-    <ul class="brand-list" >
-      <li v-for="item in brands"
+    <v-list>
+      <v-list-item-group>
+        <AppBrand
+          v-for="item in brands"
           :key="item.id"
-          class="brand-item"
-          @click.prevent="$emit('set-brand', item)"
-      >
-        <span>{{ item.title }}</span>
-      </li>
-    </ul>
+          :brand="item"
+          @set-brand="$emit('set-brand', item)"
+        />
+      </v-list-item-group>
+    </v-list>
   </div>
-
 </template>
 
 <script>
+import AppBrand from "~/components/Brand";
+
 export default {
   name: 'AppBrandList',
+  components: {AppBrand},
   props: {
     brands: {
       type: Array,
@@ -26,27 +29,3 @@ export default {
 }
 
 </script>
-
-<style lang="scss">
-h2 {
-  cursor: pointer;
-}
-.brand-list {
-  border-right: 2px solid gray;
-  margin-right: 20px;
-  padding: 10px 20px;
-}
-
-.brand-item {
-  .brand-list {
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-    font-weight: bold;
-  }
-}
-</style>

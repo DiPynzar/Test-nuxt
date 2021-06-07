@@ -55,6 +55,9 @@ export default {
   },
   methods: {
     setBrand(brand) {
+      if(brand && this.selectedBrand) {
+        return this.selectedBrand = null;
+      }
       this.selectedBrand = brand;
     },
     unSetBrand() {
@@ -68,7 +71,7 @@ export default {
   computed: {
     filteredProductList() {
       if (!this.selectedBrand) {
-        return Object.assign(this.products)
+        return this.products
       }
       return this.products.filter((item) => item.brand === this.selectedBrand.id)
     }
@@ -96,20 +99,10 @@ export default {
   display: flex;
 }
 
-@media screen and (max-width: 480px) {
-  .main {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .brands {
-    flex: 1 100%;
-    width: 100%;
-  }
-}
-
 .brands {
   flex: 1 20%;
   width: 20%;
+  margin-right: 20px;
 }
 
 .products {
@@ -117,7 +110,4 @@ export default {
   width: 80%;
 }
 
-ul {
-  list-style: none;
-}
 </style>
