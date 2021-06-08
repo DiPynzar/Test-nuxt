@@ -17,7 +17,7 @@
     </v-container>
     <v-container>
       <v-row class="flex-wrap">
-        <v-col class="brands">
+        <v-col class="brands" cols="3">
           <AppBrandList
             :brands="brands"
             @set-brand="setBrand"
