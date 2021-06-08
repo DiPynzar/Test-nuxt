@@ -1,28 +1,39 @@
 <template>
-  <div class="page-wrapper">
-    <div class="page-top">
-      <Logo></Logo>
-      <Cart :in-cart-items="inCartItems"
-            :in-cart-items-qty="inCartItemsQty"
-      />
-    </div>
-    <div class="main">
-      <div class="brands">
-        <AppBrandList
-          :brands="brands"
-          @set-brand="setBrand"
-          @unset-brand="unSetBrand"
+<div>
+    <v-container
+      class="page-top"
+      cols="12"
+      sm="12"
+      md="4"
+      lg="4"
+      xl="3"
+    >
+      <v-row class="justify-space-between">
+        <Logo></Logo>
+        <Cart :in-cart-items="inCartItems"
+              :in-cart-items-qty="inCartItemsQty"
         />
-      </div>
-      <div class="products">
-        <AppProductList
-          :products="filteredProductList"
-          :selected-brand="selectedBrand"
-          @add-to-cart="addToCart"
-        />
-      </div>
-    </div>
-  </div>
+      </v-row>
+    </v-container>
+    <v-container>
+      <v-row class="flex-wrap">
+        <v-col class="brands">
+          <AppBrandList
+            :brands="brands"
+            @set-brand="setBrand"
+            @unset-brand="unSetBrand"
+          />
+        </v-col>
+        <v-col class="products flex-sm-grow-1">
+          <AppProductList
+            :products="filteredProductList"
+            :selected-brand="selectedBrand"
+            @add-to-cart="addToCart"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
+</div>
 </template>
 
 <script>
@@ -55,8 +66,8 @@ export default {
   },
   methods: {
     setBrand(brand) {
-      if(brand && this.selectedBrand) {
-        return this.selectedBrand = null;
+      if (brand && this.selectedBrand) {
+        return this.unSetBrand()
       }
       this.selectedBrand = brand;
     },
@@ -64,8 +75,8 @@ export default {
       this.selectedBrand = null;
     },
     addToCart(product) {
-     this.inCartItems.push(product);
-     this.inCartItemsQty += 1;
+      this.inCartItems.push(product);
+      this.inCartItemsQty += 1;
     }
   },
   computed: {
@@ -79,35 +90,3 @@ export default {
 }
 
 </script>
-
-<style lang="scss">
-
-.page-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.page-top {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 2px solid gray;
-  margin-bottom: 30px;
-  padding: 20px 10px;
-}
-
-.main {
-  display: flex;
-}
-
-.brands {
-  flex: 1 20%;
-  width: 20%;
-  margin-right: 20px;
-}
-
-.products {
-  flex: 1 80%;
-  width: 80%;
-}
-
-</style>

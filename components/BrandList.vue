@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <h2 @click.prevent="$emit('unset-brand')">All Brands</h2>
     <v-list>
       <v-list-item-group>
@@ -11,7 +11,7 @@
         />
       </v-list-item-group>
     </v-list>
-  </div>
+  </v-container>
 </template>
 
 <script>

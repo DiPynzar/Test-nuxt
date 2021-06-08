@@ -1,8 +1,26 @@
 <template>
-  <div class="mini-cart">
-      <img src="/images/cart.png" alt="">
-      <span v-show="inCartItemsQty > 0" class="qty">{{inCartItemsQty}}</span>
-  </div>
+    <v-img
+      v-if="inCartItemsQty <= 0"
+      src="/images/cart.png"
+      alt="cart"
+      max-height="50"
+      max-width="50"
+    />
+    <v-badge v-else
+             top
+             bordered
+             color="red darken-4"
+             :content="inCartItemsQty"
+             offset-x="20"
+             offset-y="30"
+    >
+      <v-img
+        src="/images/cart.png"
+        alt="cart"
+        max-height="50"
+        max-width="50"
+      />
+    </v-badge>
 </template>
 
 <script>
@@ -20,36 +38,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.mini-cart {
-  & {
-    cursor: pointer;
-    position: relative;
-    width: 50px;
-    height: auto;
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-  }
-
-  .qty {
-    position: absolute;
-    right: 0;
-    top: 10px;
-    padding: 5px;
-    background-color: darkred;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 14px;
-    text-align: center;
-    transition: all 2s;
-  }
-}
-</style>

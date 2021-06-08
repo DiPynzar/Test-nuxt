@@ -1,7 +1,11 @@
 <template>
-  <v-card>
+  <v-card hover rounded>
     <v-img
-      :src="product.image" alt="">
+      :src="product.image"
+      :alt="product.title"
+      max-width="200"
+      class="align-center"
+    >
     </v-img>
     <v-card-title>{{ product.title }}</v-card-title>
     <v-card-text>

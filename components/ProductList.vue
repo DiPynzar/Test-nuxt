@@ -1,8 +1,8 @@
 <template>
-  <v-container class="pt-0">
+  <v-container>
     <h2 class="mb-4">Catalog</h2>
     <v-row v-if="Array.isArray(products) && products.length">
-      <v-fade-transition  group tag="row" class="row">
+      <v-fade-transition  group class="row">
         <v-col v-for="item in products"
                :key="item.id"
                class="product-item"
