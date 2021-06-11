@@ -1,9 +1,8 @@
 <template>
-  <v-card hover rounded>
+  <v-card hover rounded max-width="270">
     <v-img
       :src="product.image"
       :alt="product.title"
-      max-width="200"
       class="align-center"
     >
     </v-img>
@@ -24,12 +23,14 @@
       </div>
     </v-card-text>
     <v-card-actions>
-      <v-btn block @click.prevent="$emit('add-to-cart', product)">Add to cart</v-btn>
+      <v-btn block @click.prevent=addToCart(product)>Add to cart</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: 'AppBaseProduct',
   props: {
@@ -37,6 +38,11 @@ export default {
       type: Object,
       require: true,
     }
+  },
+  methods: {
+    ...mapActions({
+      addToCart: 'cart/addToCart'
+    })
   }
 }
 </script>

@@ -1,10 +1,13 @@
 <template>
-  <v-list-item @click.prevent="$emit('set-brand', brand)">
-    <v-list-item-title v-text="brand.title"></v-list-item-title>
+  <v-list-item
+    @click.prevent=setBrand(brand)
+  >
+    <v-list-item-title v-text="brand.title"/>
   </v-list-item>
 </template>
 
 <script>
+import {mapActions} from "vuex";
 export default {
   name: 'AppBrand',
   props: {
@@ -12,6 +15,11 @@ export default {
       type: Object,
       require: true,
     }
+  },
+  methods: {
+    ...mapActions({
+      setBrand: 'brand/setSelectedBrand'
+    })
   }
 }
 </script>
