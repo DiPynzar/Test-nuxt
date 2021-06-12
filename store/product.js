@@ -1,5 +1,5 @@
 export const state = () => ({
-  products: {}
+  products: []
 })
 
 export const getters = {
@@ -19,7 +19,4 @@ export const actions = {
     const posts = await require('/assets/products.json')
     ctx.commit('updateProducts', posts)
   }
-  // async nuxtServerInit(store, ctx) {
-  //   await console.log('started')
-  // },
 }

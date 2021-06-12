@@ -31,7 +31,7 @@ export default {
   name: 'AppProductList',
   props: {
     products: {
-      type: Object,
+      type: Array,
       require: true
       }
     }
