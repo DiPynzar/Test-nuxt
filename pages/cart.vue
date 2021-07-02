@@ -8,7 +8,10 @@
     xl="6"
   >
     <h2> Shopping Cart</h2>
-    <v-simple-table dense>
+    <v-simple-table
+      dense
+      v-if="inCartProducts.length"
+    >
       <template v-slot:default>
         <thead>
         <tr>
@@ -44,74 +47,30 @@
         </thead>
         <tbody
         >
-        <tr
+        <AppInCartItem
           v-for="item in inCartProducts"
           :key="item.sku"
-        >
-          <td>
-            <v-row class="flex-nowrap align-center">
-              <v-col
-                cols="4"
-                sm="3"
-                md="4"
-                style="max-width: 200px"
-              >
-                <v-img
-                  :src="item.image"
-                  class="align-center"
-                />
-              </v-col>
-              <v-col
-                cols="4"
-                sm="2"
-                md="3"
-              >
-                <span> {{ item.brand }} / {{ item.title }}</span>
-              </v-col>
-            </v-row>
-          </td>
-          <td>
-            <v-col
-              cols="4"
-              sm="2"
-              md="3"
-            >
-              <span>{{ item.regular_price.currency }} {{ item.regular_price.value }} </span>
-            </v-col>
-          </td>
-          <td>
-            <AppItemQty :qty="+item.qty" :itemId="item.id"/>
-          </td>
-          <td>
-            <v-col
-              cols="4"
-              sm="2"
-              md="3"
-            >
-             <span>
-              {{ item.regular_price.currency }} {{ item.qty * item.regular_price.value }}
-            </span>
-            </v-col>
-          </td>
-          <td>
-            <AppRemoveCartItemButton :itemId="item.id"/>
-          </td>
-        </tr>
+          :product="item"
+        />
         </tbody>
       </template>
     </v-simple-table>
+    <div
+      v-else
+    >
+      <v-divider/>
+      <span> No items in cart yet.</span>
+    </div>
   </v-container>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
-import AppItemQty from "~/components/ItemQty"
-import AppRemoveCartItemButton from "~/components/RemoveCartItemButton"
+import AppInCartItem from "~/components/InCartItem"
 
 export default {
   components: {
-    AppRemoveCartItemButton,
-    AppItemQty,
+    AppInCartItem
   },
   computed: {
     ...mapGetters({
