@@ -52,8 +52,8 @@
 </template>
 
 <script>
-import AppItemQty from "~/components/ItemQty"
-import AppRemoveCartItemButton from "~/components/RemoveCartItemButton"
+import AppItemQty from "~/components/cart/ItemQty"
+import AppRemoveCartItemButton from "~/components/cart/RemoveCartItemButton"
 
 export default {
   name: "AppinCartItem",

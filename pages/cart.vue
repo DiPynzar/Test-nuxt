@@ -85,7 +85,7 @@
 
 <script>
 import {mapGetters} from "vuex";
-import AppInCartItem from "~/components/InCartItem"
+import AppInCartItem from "~/components/cart/InCartItem"
 
 export default {
   components: {
