@@ -4,8 +4,7 @@
       :src="product.image"
       :alt="product.title"
       class="align-center"
-    >
-    </v-img>
+    />
     <v-card-title>{{ product.title }}</v-card-title>
     <v-card-text>
       <v-row align="start"
@@ -41,7 +40,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      addToCart: 'cart/addToCart'
+      addToCart: 'localStorage/addToCart'
     })
   }
 }

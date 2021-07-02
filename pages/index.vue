@@ -8,10 +8,6 @@
       lg="4"
       xl="3"
     >
-      <v-row class="justify-space-between">
-        <Logo/>
-        <Cart/>
-      </v-row>
     </v-container>
     <v-container>
       <v-row class="flex-wrap">
@@ -31,16 +27,12 @@
 <script>
 import AppProductList from "~/components/ProductList";
 import AppBrandList from "~/components/BrandList";
-import Logo from "~/components/Logo";
-import Cart from "~/components/Cart";
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
   components: {
     AppBrandList,
-    AppProductList,
-    Logo,
-    Cart
+    AppProductList
   },
   methods: {
     ...mapActions({
