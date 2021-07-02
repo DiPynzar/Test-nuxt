@@ -1,7 +1,7 @@
 export const state = () => ({
   inCartProductList: [],
   inCartItemsQty: null,
-  qty: null
+  subtotal: null
 })
 
 export const getters = {
@@ -11,6 +11,9 @@ export const getters = {
   inCartItemsQty(state) {
     return state.inCartItemsQty;
   },
+  subtotal(state) {
+    return state.subtotal;
+  }
 }
 
 export const mutations = {
@@ -43,20 +46,29 @@ export const mutations = {
   removeItemFromCart(state, removedItemId) {
    const filteredItems = state.inCartProductList.filter((item) => item.id !== removedItemId)
     state.inCartProductList = filteredItems
-  }
+  },
+
+  calcSubtotal(state) {
+    state.inCartProductList.map((item) => {
+      state.subtotal += (item.qty * item.regular_price.value)
+    })
+  },
 }
 
 export const actions = {
   addToCart(ctx, product) {
     ctx.commit('updateInCartProductList', product)
+    ctx.commit('calcSubtotal', payload)
   },
   updateItemQty(ctx, payload) {
     ctx.commit('updateItemQty', payload)
     ctx.commit('updateInCartItemsQty', payload)
+    ctx.commit('calcSubtotal', payload)
 
   },
   removeItemFromCart(ctx, payload) {
     ctx.commit('removeItemFromCart', payload)
     ctx.commit('updateInCartItemsQty', payload)
+    ctx.commit('calcSubtotal', payload)
   },
 }

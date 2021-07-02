@@ -8,53 +8,72 @@
     xl="6"
   >
     <h2> Shopping Cart</h2>
-    <v-simple-table
-      dense
+    <v-container
       v-if="inCartProducts.length"
     >
-      <template v-slot:default>
-        <thead>
-        <tr>
-          <th class="text-center"
-              cols="4"
-              sm="3"
-              md="4"
+      <v-simple-table
+        dense
+
+      >
+        <template v-slot:default>
+          <thead>
+          <tr>
+            <th class="text-center"
+                cols="4"
+                sm="3"
+                md="4"
+            >
+              Item
+            </th>
+            <th class="text-left"
+                cols="3"
+                sm="2"
+                md="3"
+            >
+              Price
+            </th>
+            <th class="text-left"
+                cols="3"
+                sm="2"
+                md="3"
+            >
+              Qty
+            </th>
+            <th class="text-left"
+                cols="3"
+                sm="2"
+                md="3"
+            >
+              Total
+            </th>
+          </tr>
+          </thead>
+          <tbody
           >
-            Item
-          </th>
-          <th class="text-left"
-              cols="3"
-              sm="2"
-              md="3"
-          >
-            Price
-          </th>
-          <th class="text-left"
-              cols="3"
-              sm="2"
-              md="3"
-          >
-            Qty
-          </th>
-          <th class="text-left"
-              cols="3"
-              sm="2"
-              md="3"
-          >
-            Total
-          </th>
-        </tr>
-        </thead>
-        <tbody
+          <AppInCartItem
+            v-for="item in inCartProducts"
+            :key="item.sku"
+            :product="item"
+          />
+          </tbody>
+        </template>
+      </v-simple-table>
+        <v-col
+          cols="12"
+          class="d-flex justify-end flex-wrap"
         >
-        <AppInCartItem
-          v-for="item in inCartProducts"
-          :key="item.sku"
-          :product="item"
-        />
-        </tbody>
-      </template>
-    </v-simple-table>
+          <h3
+            class="text-right"
+            style="width: 100%"
+          > Subtotal: $ {{subtotal}} </h3>
+          <v-btn
+            color="primary"
+            class="mt-2"
+          >
+            Checkout
+          </v-btn>
+        </v-col>
+    </v-container>
     <div
       v-else
     >
@@ -74,7 +93,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      inCartProducts: 'localStorage/inCartProductList'
+      inCartProducts: 'localStorage/inCartProductList',
+      subtotal: 'localStorage/subtotal'
     })
   }
 }
