@@ -6,6 +6,7 @@
   >
     <input
       :value="qty"
+      type="number"
       @change="updateProductQty"
       class="white--text"
     >

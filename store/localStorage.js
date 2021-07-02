@@ -26,7 +26,7 @@ export const mutations = {
 
   updateItemQty(state, {newQty, id}) {
     state.inCartProductList.map((item) => {
-      if (item.id === id) {
+      if ((item.id === id) && (newQty > 0)) {
         item.qty = newQty
       }
     })
