@@ -18,6 +18,7 @@ export const getters = {
 
 export const mutations = {
   updateInCartProductList(state, product) {
+    console.log(product)
     if (!state.inCartProductList.filter((item) => item.id === product.id).length) {
       state.inCartProductList.push(product);
       product['qty'] = 1;
@@ -58,7 +59,7 @@ export const mutations = {
 export const actions = {
   addToCart(ctx, product) {
     ctx.commit('updateInCartProductList', product)
-    ctx.commit('calcSubtotal', payload)
+    ctx.commit('calcSubtotal', product)
   },
   updateItemQty(ctx, payload) {
     ctx.commit('updateItemQty', payload)

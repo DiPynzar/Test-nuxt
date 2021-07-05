@@ -22,7 +22,7 @@
 
 <script>
 
-import AppBaseProduct from "~/components/BaseProduct";
+import AppBaseProduct from "~/components/product/BaseProduct";
 
 export default {
   components: {

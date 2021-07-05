@@ -65,7 +65,7 @@
           <h3
             class="text-right"
             style="width: 100%"
-          > Subtotal: $ {{subtotal}} </h3>
+          > Subtotal: $ {{subtotal.toFixed(2)}} </h3>
           <v-btn
             color="primary"
             class="mt-2"

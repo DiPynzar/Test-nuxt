@@ -14,11 +14,13 @@
           />
         </v-col>
         <v-col
-          cols="4"
-          sm="2"
-          md="3"
+          cols="6"
+          sm="4"
+          md="6"
         >
           <span> {{ product.brand }} / {{ product.title }}</span>
+          <div v-if="product.size"> Size: {{ product.size }} </div>
+          <div v-if="product.color"> Color: {{ product.color }} </div>
         </v-col>
       </v-row>
     </td>
@@ -41,7 +43,7 @@
         md="3"
       >
              <span>
-              {{ product.regular_price.currency }} {{ product.qty * product.regular_price.value }}
+              {{ product.regular_price.currency }} {{ (product.qty * product.regular_price.value).toFixed(2) }}
             </span>
       </v-col>
     </td>
