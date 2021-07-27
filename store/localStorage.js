@@ -18,7 +18,6 @@ export const getters = {
 
 export const mutations = {
   updateInCartProductList(state, product) {
-    console.log(product)
     if (!state.inCartProductList.filter((item) => item.id === product.id).length) {
       state.inCartProductList.push(product);
       product['qty'] = 1;
@@ -28,6 +27,7 @@ export const mutations = {
     state.inCartItemsQty += 1;
   },
 
+//TODO add validation to input
   updateItemQty(state, {newQty, id}) {
     state.inCartProductList.map((item) => {
       if ((item.id === id) && (newQty > 0)) {
@@ -48,12 +48,12 @@ export const mutations = {
    const filteredItems = state.inCartProductList.filter((item) => item.id !== removedItemId)
     state.inCartProductList = filteredItems
   },
-
+//TODO fix bug with subtotal calculate
   calcSubtotal(state) {
     state.inCartProductList.map((item) => {
       state.subtotal += (item.qty * item.regular_price.value)
     })
-  },
+  }
 }
 
 export const actions = {
@@ -65,7 +65,6 @@ export const actions = {
     ctx.commit('updateItemQty', payload)
     ctx.commit('updateInCartItemsQty', payload)
     ctx.commit('calcSubtotal', payload)
-
   },
   removeItemFromCart(ctx, payload) {
     ctx.commit('removeItemFromCart', payload)

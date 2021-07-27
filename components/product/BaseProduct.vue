@@ -54,7 +54,7 @@
       </v-btn>
       <v-btn v-else
              block
-             @click.prevent=addToCart(getCurrentVariantProductInfo())
+             @click.prevent=addConfProductToCart()
       >
         Add to cart
       </v-btn>
@@ -68,7 +68,6 @@ import AppSwatches from "~/components/product/Swatches";
 
 export default {
   name: 'AppBaseProduct',
-  components: {AppSwatches},
   data() {
     return {
       id: null,
@@ -92,7 +91,7 @@ export default {
       value[0] === 'color'
         ? this.color = {"code": value[0], "value_index": value[1]}
         : this.size = {"code": 'size', "value_index": value[1]}
-
+      //this.setSwatchesMap();
       this.getConfProductInfo();
     },
 
@@ -112,15 +111,34 @@ export default {
         }
       })
     },
+
     findSwatchLabel(attrName, product) {
-       let attribute = product.configurable_options.filter(item => item.attribute_code === attrName.code)
+      let attribute = product.configurable_options.filter(item => item.attribute_code === attrName.code)
       let values = attribute[0]['values'].filter(item => item.value_index === attrName.value_index);
       return values[0].label
     },
+
     getCurrentVariantProductInfo() {
       let currentVariantIndex = this.product.variants.findIndex((item) => this._.isEqual(item.attributes, [this.color, this.size]));
       let variant = {...this.product.variants[currentVariantIndex]}
       return variant.product;
+    },
+
+    setSwatchesMap() {
+      // Это еще в процессе, не доделано
+      let swatches = [{keys: []}, {values: []}];
+      this.product.variants.map(variant => {
+        swatches[0]['keys'].push(variant.attributes[0].value_index)
+        swatches[1]['values'].push(variant.attributes[1].value_index)
+      })
+      console.log(swatches)
+
+    },
+
+    addConfProductToCart() {
+      if (this.getCurrentVariantProductInfo()) {
+        this.addToCart(this.getCurrentVariantProductInfo())
+      }
     }
   }
 }
@@ -132,6 +150,6 @@ export default {
 }
 
 .swatch {
-  width: 35px;
+  width: 45px;
 }
 </style>
